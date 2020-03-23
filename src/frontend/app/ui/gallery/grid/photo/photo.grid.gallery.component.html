@@ -1,21 +1,44 @@
 <div #photoContainer class="photo-container" (mouseover)="mouseOver()" (mouseout)="mouseOut()">
 
-
-  <img alt="{{gridMedia.media.name}}" #img [src]="thumbnail.Src | fixOrientation:gridMedia.Orientation | async"
-       *ngIf="thumbnail.Available">
-
   <app-gallery-grid-photo-loading
     [error]="thumbnail.Error"
-    [animate]="thumbnail.loading"
+    [animate]="false && thumbnail.loading"
     *ngIf="!thumbnail.Available">
   </app-gallery-grid-photo-loading>
 
+  <!--Default lightbox image -->
+  <ng-container *ngIf="!useLightGallery; else lightGalleryPhoto">
+    <img alt="{{gridMedia.media.name}}" #img [src]="thumbnail.Src | fixOrientation:gridMedia.Orientation | async"
+        *ngIf="thumbnail.Available">
+  </ng-container>
 
+  <!--Lightgallery image -->
+  <ng-template #lightGalleryPhoto>
+    <div *ngIf="gridMedia.isVideo()" style="display:none;" id="video-{{gridMedia.media.name.replace('.', '-')}}">
+     <video class="lg-video-object lg-html5 video-js" controls preload="none" id="videoplayer-{{gridMedia.media.name.replace('.', '-')}}">
+        <source [src]="gridMedia.getMediaPath()">
+         Your browser does not support HTML5 video.
+    </video>
+  </div>
+
+    <a
+      [href]="gridMedia.isVideo() ? '' : gridMedia.getMediaPath()"
+      [attr.data-html]="gridMedia.isVideo() ? '#video-'+gridMedia.media.name.replace('.', '-') : ''"
+      [attr.data-poster]="gridMedia.isVideo() ? thumbnail.Src : ''"
+    >
+      <img
+        #img *ngIf="thumbnail.Available"
+        [src]="thumbnail.Src | fixOrientation:gridMedia.Orientation | async"
+        [alt]="gridMedia.media.name"
+      />
+    </a>
+  </ng-template>
+
+  <!--Video indicator -->
   <div *ngIf="gridMedia.isVideo()" class="video-indicator"
        [style.marginTop.px]="-container.nativeElement.offsetHeight"
        [style.marginLeft.px]="container.nativeElement.offsetWidth">
     {{gridMedia.Video.metadata.duration  | duration}} <span class="oi oi-video"></span></div>
-
 
   <!--Info box -->
   <div class="info"

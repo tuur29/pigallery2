@@ -69,3 +69,7 @@ nav {
 .search-type{
   margin-left: 5px;
 }
+
+.btn {
+  color: var(--text-color-secondary);
+}

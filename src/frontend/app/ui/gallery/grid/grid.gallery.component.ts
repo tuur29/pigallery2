@@ -29,6 +29,53 @@ import {MediaDTO} from '../../../../../common/entities/MediaDTO';
 import {QueryParams} from '../../../../../common/QueryParams';
 import {SeededRandomService} from '../../../model/seededRandom.service';
 
+declare var lightGallery: any;
+const setupLightGallery = (): void => {
+  const el = document.querySelector('#gallery');
+
+  if (el && (window as any).lgData[el.getAttribute('lg-uid')]) {
+    (window as any).lgData[el.getAttribute('lg-uid')].destroy(true);
+  }
+
+  setTimeout(() => {
+    lightGallery(el, {
+      selector: 'a',
+      controls: true,
+      loop : false,
+      download: true,
+      counter: true,
+      videojs: true,
+      // Custom options
+      mode: 'lg-slide',
+      speed: 200,
+      hideBarsDelay: 3000,
+      closable: false,
+      hideControlOnEnd: true,
+      preload: 2,
+      swipeThreshold: 40,
+      getCaptionFromTitleOrAlt: false,
+      videojsOptions: {
+          fluid: true,
+          controlBar: {
+              volumePanel: {
+                  inline: false
+              }
+          }
+      },
+      share: false,
+      pager: false,
+      hash: false,
+      thumbContHeight: 120,
+      thumbWidth: 100,
+      showThumbByDefault: false,
+      videoMaxWidth: 'initial',
+      pause: 5000,
+      zoom: true,
+      scale: 0.5,
+    });
+  }, 50);
+};
+
 @Component({
   selector: 'app-gallery-grid',
   templateUrl: './grid.gallery.component.html',
@@ -60,6 +107,7 @@ export class GalleryGridComponent implements OnChanges, OnInit, AfterViewInit, O
   private onScrollFired = false;
   private helperTime: number = null;
   private renderedPhotoIndex = 0;
+  private useLightGallery = true; // when using lightGallery, make sure you disable the Client.Other.enableOnScrollRendering setting
 
   constructor(private overlayService: OverlayService,
               private changeDetector: ChangeDetectorRef,
@@ -342,6 +390,10 @@ export class GalleryGridComponent implements OnChanges, OnInit, AfterViewInit, O
         throw new Error('Grid media rendering failed');
       }
       renderedContentHeight += ret;
+    }
+
+    if (this.useLightGallery) {
+      setupLightGallery();
     }
   }
 

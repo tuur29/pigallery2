@@ -1,12 +1,13 @@
-<div #gridContainer>
+<div #gridContainer id="gallery">
   <app-gallery-grid-photo
     *ngFor="let gridPhoto of photosToRender"
-    (click)="photoClicked(gridPhoto.media)"
+    (click)="!useLightGallery && photoClicked(gridPhoto.media)"
     [gridMedia]="gridPhoto"
     [style.width.px]="gridPhoto.renderWidth"
     [style.height.px]="gridPhoto.renderHeight"
     [style.marginLeft.px]="IMAGE_MARGIN"
-    [style.marginRight.px]="IMAGE_MARGIN">
+    [style.marginRight.px]="IMAGE_MARGIN"
+    [useLightGallery]="useLightGallery">
 
   </app-gallery-grid-photo>
 </div>

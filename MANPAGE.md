@@ -188,7 +188,7 @@ Environmental variables:
   Client-Faces-writeAccessMinRole                    (default: 'Admin')
 ```
 
- ### `config.json` sample:
+### `config.json` sample:
 ```json
 {
     "Server": {
@@ -403,4 +403,12 @@ Environmental variables:
             "writeAccessMinRole": "Admin"
         }
     }
-}```
+}
+```
+### For development
+
+Put some media in `./demo/images` and run:
+
+- `npm run npm run run-dev`
+- `npm start -- --config-path ./demo/config/config.json`
+- 

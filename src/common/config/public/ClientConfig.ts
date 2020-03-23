@@ -94,7 +94,7 @@ export module ClientConfig {
   @SubConfigClass()
   export class UIConfig {
     @ConfigProperty()
-    darkMode: boolean = false;
+    darkMode: boolean = true; // for now the darkmode settings doesn't seem to actually work, hardcoding for now
   }
 
   @SubConfigClass()
