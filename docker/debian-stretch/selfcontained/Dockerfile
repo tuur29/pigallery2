@@ -1,7 +1,7 @@
 FROM node:12-stretch AS BUILDER
 # LABEL maintainer="Patrik J. Braun"
 # copying only package{-lock}.json to make node_modules cachable
-RUN git clone https://github.com/bpatrik/pigallery2.git /build
+RUN git clone -b feature/custom https://github.com/tuur29/pigallery2.git /build
 WORKDIR /build
 RUN set -x && npm install --unsafe-perm && \
     mkdir -p /build/release/data/config && \
