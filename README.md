@@ -1,3 +1,6 @@
+> ! This repo is a fork of [barry-luijten fork](https://github.com/barry-luijten/pigallery2) of [PiGallery2](https://github.com/bpatrik/pigallery2) with [some custom edits](./EDITS.md). A [Docker image](https://hub.docker.com/r/tuur29/pigallery2) is also available.
+
+
 # PiGallery2 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/bpatrik/pigallery2)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/bpatrik/pigallery2.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/bpatrik/pigallery2/context:javascript)
