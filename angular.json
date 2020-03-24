@@ -29,14 +29,14 @@
               "src/frontend/styles.css"
             ],
             "scripts": [
-              "node_modules/lightgallery.js/dist/js/lightgallery.js",
-              "node_modules/lg-video.js/dist/lg-video.js",
+              "node_modules/lightgallery.js/dist/js/lightgallery.min.js",
+              "node_modules/lg-video.js/dist/lg-video.min.js",
               "node_modules/lg-autoplay.js/dist/lg-autoplay.min.js",
               "node_modules/lg-fullscreen.js/dist/lg-fullscreen.min.js",
               "node_modules/lg-pager.js/dist/lg-pager.min.js",
               "node_modules/lg-thumbnail.js/dist/lg-thumbnail.min.js",
               "node_modules/lg-zoom.js/dist/lg-zoom.min.js",
-              "node_modules/video.js/dist/video.js"
+              "node_modules/video.js/dist/video.min.js"
             ]
           },
           "configurations": {
