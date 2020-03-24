@@ -101,7 +101,7 @@ export class GalleryGridComponent implements OnChanges, OnInit, AfterViewInit, O
   };
   delayedRenderUpToPhoto: string = null;
   private scrollListenerPhotos: GalleryPhotoComponent[] = [];
-  private TARGET_COL_COUNT = 5;
+  private TARGET_COL_COUNT = 3;
   private MIN_ROW_COUNT = 2;
   private MAX_ROW_COUNT = 5;
   private onScrollFired = false;
