@@ -11,6 +11,7 @@ a {
   font-size: 80px;
   top: calc(50% - 40px);
   left: calc(50% - 40px);
+  opacity: 0.5;
 }
 
 .photo {
