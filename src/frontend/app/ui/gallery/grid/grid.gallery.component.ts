@@ -168,7 +168,8 @@ export class GalleryGridComponent implements OnChanges, OnInit, AfterViewInit, O
 
   @HostListener('window:resize')
   onResize() {
-    if (this.isAfterViewInit === false) {
+    // Disable resizing when lightbox is open otherwise the lightbox instance will be removed
+    if (this.isAfterViewInit === false || document.body.matches('.lg-on')) {
       return;
     }
     // render the same amount of images on resize
