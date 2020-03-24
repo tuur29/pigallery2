@@ -410,4 +410,4 @@ Environmental variables:
 Put some media in `./demo/images` and run:
 
 - `npm run run-dev`
-- `npm start -- --config-path ./demo/config/config.json`
+- `npm run start-dev -- --config-path ./demo/config/config.json`
