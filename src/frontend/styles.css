@@ -119,6 +119,24 @@ bs-dropdown-container {
   border-color: #eee;
 }
 
+/* Do not stretch video previews */
+.lg-outer .lg-video .lg-object.lg-has-poster {
+	width: initial !important;
+  height: initial !important;
+  max-width: 100%;
+  max-height: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%)!important;
+}
+
+/* Disable fade to black when sliding to next photo */
+
+.lg-item.lg-loaded.lg-complete.lg-prev-slide,
+.lg-item.lg-loaded.lg-complete.lg-next-slide {
+	opacity: 1 !important;
+}
+
 /* Add padding in video player for thumb toggle */
 .video-js:not(.vjs-fullscreen) .vjs-control-bar {
   padding-right: 50px;

@@ -69,7 +69,7 @@ const setupLightGallery = (): void => {
       thumbWidth: 100,
       showThumbByDefault: false,
       videoMaxWidth: 'initial',
-      pause: 5000,
+      pause: 3000,
       zoom: true,
       scale: 0.5,
     });
