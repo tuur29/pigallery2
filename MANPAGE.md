@@ -411,3 +411,5 @@ Put some media in `./demo/images` and run:
 
 - `npm run run-dev`
 - `npm run start-dev -- --config-path ./demo/config/config.json`
+
+Rebuild backend with: `npm run build-backend`
