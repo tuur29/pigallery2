@@ -23,6 +23,7 @@
 
     <a
       [href]="gridMedia.isVideo() ? '' : gridMedia.getMediaPath()"
+      [attr.data-download-url]="gridMedia.getMediaPath()"
       [attr.data-html]="gridMedia.isVideo() ? '#video-'+gridMedia.media.name.replace('.', '-') : ''"
       [attr.data-poster]="gridMedia.isVideo() ? thumbnail.Src : ''"
     >
