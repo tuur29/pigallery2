@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, HostListener} from '@angular/core';
 import {Dimension, IRenderable} from '../../../../model/IRenderable';
 import {GridMedia} from '../GridMedia';
 import {SearchTypes} from '../../../../../../common/entities/AutoCompleteItem';
@@ -29,6 +29,8 @@ export class GalleryPhotoComponent implements IRenderable, OnInit, OnDestroy {
   searchEnabled = true;
 
   wasInView: boolean = null;
+
+  readonly MAX_SEEALLINFO_WIDTH = 800;
 
   constructor(private thumbnailService: ThumbnailManagerService) {
     this.SearchTypes = SearchTypes;
@@ -66,7 +68,7 @@ export class GalleryPhotoComponent implements IRenderable, OnInit, OnDestroy {
       }
       this.keywords = this.keywords.concat((metadata.keywords || []).map(k => ({value: k, type: SearchTypes.keyword})));
     }
-
+    if (window.innerWidth < this.MAX_SEEALLINFO_WIDTH) this.infoBarVisible = true;
   }
 
   ngOnDestroy() {
@@ -114,10 +116,20 @@ export class GalleryPhotoComponent implements IRenderable, OnInit, OnDestroy {
     if (this.animationTimer != null) {
       clearTimeout(this.animationTimer);
     }
+    if (window.innerWidth < this.MAX_SEEALLINFO_WIDTH) return;
     this.animationTimer = window.setTimeout(() => {
       this.animationTimer = null;
       this.infoBarVisible = false;
     }, 500);
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    window.requestAnimationFrame(() => {
+      if (window.innerWidth < this.MAX_SEEALLINFO_WIDTH) {
+        this.mouseOver();
+      }
+    });
   }
 
   public getDimension(): Dimension {

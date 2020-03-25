@@ -17,6 +17,7 @@
 ## Frontend
 
 - Limit height of directory names
+- Always show image info box on mobile
 
 ## Backend
 

@@ -146,6 +146,7 @@ bs-dropdown-container {
 
 .video-js .vjs-tech {
   outline: 0;
+  max-height: 100vh;
 }
 
 .video-js .vjs-big-play-button {
@@ -211,4 +212,8 @@ bs-dropdown-container {
 .video-js .vjs-progress-control .vjs-time-tooltip {
   background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
+}
+
+.vjs-loading-spinner {
+  border-radius: 100% !important;
 }

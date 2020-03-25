@@ -51,10 +51,6 @@ img {
   }
 }
 
-.photo-container:hover .info {
-  animation: show-info .3s forwards;
-}
-
 @keyframes show-info {
   0% {
     transform: translateY(0);
@@ -95,6 +91,20 @@ img {
   -webkit-transition: transform .3s ease-out, background-color .3s ease-out;
   -o-transition: transform .3s ease-out, background-color .3s ease-out;
   -ms-transition: transform .3s ease-out, background-color .3s ease-out;
+}
+
+@media (max-width: 800px) {
+  .photo-container .info {
+    animation: none;
+    transform: translateY(-100%);
+    background: rgba(0,0,0,0.8);
+  }
+}
+
+@media (min-width: 801px) {
+  .photo-container:hover .info {
+    animation: show-info .3s forwards;
+  }
 }
 
 .photo-container {
