@@ -107,8 +107,8 @@ export class PublicRouter {
           display: 'standalone',
           orientation: 'portrait-primary',
           start_url: Config.Client.publicUrl,
-          background_color: 'black',
-          theme_color: 'black'
+          background_color: '#000000',
+          theme_color: '#000000'
         });
       }
     );
