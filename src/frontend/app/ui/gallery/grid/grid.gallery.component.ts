@@ -30,6 +30,7 @@ import {QueryParams} from '../../../../../common/QueryParams';
 import {SeededRandomService} from '../../../model/seededRandom.service';
 
 declare var lightGallery: any;
+
 const setupLightGallery = (): void => {
   const el = document.querySelector('#gallery');
 
@@ -73,6 +74,23 @@ const setupLightGallery = (): void => {
       zoom: true,
       scale: 0.5,
     });
+
+    // Allow back button to close lightbox
+    let listener: any = null;
+    el.addEventListener('onBeforeOpen', () => {
+      window.history.pushState('forward', null, window.location.href.split('#')[0] + '#modal');
+      listener = window.addEventListener('popstate', () => {
+        (window as any).lgData[el.getAttribute('lg-uid')].destroy();
+      });
+    }, false);
+
+    el.addEventListener('onBeforeClose', () => {
+      if (listener) {
+        el.removeEventListener('popstate', listener);
+      }
+      window.history.replaceState('forward', null, window.location.href.split('#')[0]);
+    }, false);
+
   }, 50);
 };
 
