@@ -8,6 +8,7 @@
 - Dark theme (kudos to [barry-luijten fork](https://github.com/barry-luijten/pigallery2))
   - Changed the tint to be darker
   - Made it the default setting
+  - Darkened placeholder images and icons
   - Changed Android statusbar to black
 - Use [lightgallery.js](https://sachinchoolur.github.io/lightgallery.js/) and [videojs](https://videojs.com/) instead of the default lightbox
   - Improvements to lightGallery and videoJs themes and functionality
@@ -18,6 +19,7 @@
 
 - Limit height of directory names
 - Always show image info box on mobile
+- Disable over the top loading animations
 
 ## Backend
 

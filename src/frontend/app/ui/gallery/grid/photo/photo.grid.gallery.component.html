@@ -17,7 +17,7 @@
     <div
       *ngIf="gridMedia.isVideo()"
       style="display:none;"
-      id="video-{{gridMedia.media.name.replace('.', '-').replace(' ', '-').replace('[', '-').replace(']', '-')}}"
+      [id]="videoSelector"
     >
      <video
       class="lg-video-object lg-html5 video-js"
@@ -32,7 +32,7 @@
       [href]="gridMedia.isVideo() ? '' : gridMedia.getMediaPath()"
       [attr.data-download-url]="gridMedia.getMediaPath()"
       [attr.data-poster]="gridMedia.isVideo() ? thumbnail.Src : ''"
-      [attr.data-html]="gridMedia.isVideo() ? '#video-'+gridMedia.media.name.replace('.', '-').replace(' ', '-').replace('[', '-').replace(']', '-') : ''"
+      [attr.data-html]="gridMedia.isVideo() ? '#'+videoSelector : ''"
     >
       <img
         #img *ngIf="thumbnail.Available"
