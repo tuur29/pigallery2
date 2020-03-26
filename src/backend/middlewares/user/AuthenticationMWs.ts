@@ -49,7 +49,7 @@ export class AuthenticationMWs {
       return next(new ErrorDTO(ErrorCodes.CREDENTIAL_NOT_FOUND, null, err));
     }
     if (typeof req.session.user === 'undefined') {
-      res.status(401);
+      res.status(403);
       return next(new ErrorDTO(ErrorCodes.NOT_AUTHENTICATED, 'Not authenticated'));
     }
     return next();
@@ -109,7 +109,7 @@ export class AuthenticationMWs {
         (Config.Client.Sharing.passwordProtected === true
           && (sharing.password)
           && !PasswordHelper.comparePassword(password, sharing.password))) {
-        res.status(401);
+        res.status(403);
         return next(new ErrorDTO(ErrorCodes.CREDENTIAL_NOT_FOUND));
       }
 

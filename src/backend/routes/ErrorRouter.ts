@@ -21,7 +21,7 @@ export class ErrorRouter {
 
         if (err.name === 'UnauthorizedError') {
           // jwt authentication error
-          res.status(401);
+          res.status(403);
           return next(new ErrorDTO(ErrorCodes.NOT_AUTHENTICATED, 'Invalid token'));
         }
 

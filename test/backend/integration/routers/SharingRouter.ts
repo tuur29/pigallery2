@@ -102,7 +102,7 @@ describe('SharingRouter', () => {
       const sharing = await RouteTestingHelper.createSharing(testUser, 'secret_pass');
       const result = await shareLogin(server, sharing.sharingKey);
 
-      result.should.have.status(401);
+      result.should.have.status(403);
       result.body.should.be.a('object');
       result.body.error.should.be.a('object');
       should.equal(result.body.error.code, ErrorCodes.CREDENTIAL_NOT_FOUND);

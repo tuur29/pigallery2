@@ -120,7 +120,7 @@ describe('UserRouter', () => {
       const result = await chai.request(server.App)
         .get('/api/user/me');
 
-      result.res.should.have.status(401);
+      result.res.should.have.status(403);
     });
 
     it('it should authenticate as user with sharing key', async () => {
@@ -169,7 +169,7 @@ describe('UserRouter', () => {
         .get('/api/user/me?' + QueryParams.gallery.sharingKey_query + '=' + sharing.sharingKey);
 
 
-      result.should.have.status(401);
+      result.should.have.status(403);
       result.body.should.be.a('object');
       result.body.error.should.be.a('object');
       should.equal(result.body.error.code, ErrorCodes.NOT_AUTHENTICATED);
