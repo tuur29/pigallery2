@@ -30,6 +30,7 @@ import {QueryParams} from '../../../../../common/QueryParams';
 import {SeededRandomService} from '../../../model/seededRandom.service';
 
 declare var lightGallery: any;
+declare var videojs: any;
 
 const setupLightGallery = (): void => {
   const el = document.querySelector('#gallery');
@@ -90,6 +91,37 @@ const setupLightGallery = (): void => {
       }
       window.history.replaceState('forward', null, window.location.href.split('#')[0]);
     }, false);
+
+    // skip ahead on double touch
+    // TODO: Pausing is broken on mobile, no clue why or how to fix it. You can pause it by changing slide for now.
+    let lastPress = 0;
+    let timeout: any = null;
+    el.addEventListener('onSlideClick', () => {
+      const video = document.querySelector('.lg-current video') as any;
+      if (video) {
+        const currentPress = Date.now();
+        const player = videojs(video);
+        if (currentPress - lastPress < 500) {
+          player.currentTime(player.currentTime() + 30);
+          player.play();
+          lastPress = 0;
+          if (timeout) {
+            clearTimeout(timeout);
+            timeout = null;
+          }
+        } else {
+          lastPress = currentPress;
+          // TODO: there is no way to easily know if the player is playing, only if it is not paused (causes issues when buffering)
+          // if (!player.paused()) {
+          //   timeout = setTimeout(() => {
+          //     player.pause();
+          //     timeout = null;
+          //   }, 500);
+          // }
+        }
+
+      }
+    });
 
   }, 50);
 };
