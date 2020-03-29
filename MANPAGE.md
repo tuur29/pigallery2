@@ -405,6 +405,7 @@ Environmental variables:
     }
 }
 ```
+
 ### For development
 
 Put some media in `./demo/images` and run:

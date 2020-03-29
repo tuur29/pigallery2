@@ -57,7 +57,7 @@ export class GalleryPhotoComponent implements IRenderable, OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.videoSelector = 'video-' + this.gridMedia.media.name.replace(/[\.\[\]\s]+/gi, '-');
+    this.videoSelector = 'video-' + this.gridMedia.media.name.replace(/[\.\[\]\s,]+/gi, '-');
     this.thumbnail = this.thumbnailService.getThumbnail(this.gridMedia);
     const metadata = this.gridMedia.media.metadata as PhotoMetadata;
     if ((metadata.keywords && metadata.keywords.length > 0) ||
