@@ -94,13 +94,13 @@ export class PublicRouter {
     );
 
       // Serve a web manifest so the site can be used as a web app
-    app.get('/manifest.json',
+    app.get('/gallery/manifest.json',
       (req: Request, res: Response, next: NextFunction) => {
         res.send({
           name: Config.Client.applicationTitle,
           icons: [
             {
-              src: 'assets/icon_inv.png',
+              src: '../assets/icon_inv.png',
               sizes: '48x48 72x72 96x96 128x128 256x256'
             }
           ],
