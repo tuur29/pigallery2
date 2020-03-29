@@ -11,6 +11,7 @@ import {SortingMethods} from '../../../../../common/entities/SortingMethods';
 import {Config} from '../../../../../common/config/public/Config';
 import {SearchResultDTO} from '../../../../../common/entities/SearchResultDTO';
 import {SearchTypes} from '../../../../../common/entities/AutoCompleteItem';
+import { SeededRandomService } from '../../../model/seededRandom.service';
 
 @Component({
   selector: 'app-gallery-navbar',
@@ -93,6 +94,11 @@ export class GalleryNavigatorComponent implements OnChanges {
 
   setSorting(sorting: SortingMethods) {
     this.galleryService.setSorting(sorting);
+    if (sorting === SortingMethods.random) {
+      SeededRandomService.saveSeed();
+    } else {
+      SeededRandomService.clearSeed();
+    }
   }
 
   /*
