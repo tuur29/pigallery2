@@ -17,7 +17,7 @@
     <div
       *ngIf="gridMedia.isVideo()"
       style="display:none;"
-      [id]="videoSelector"
+      [id]="'video-'+sourceSelector"
     >
      <video
       class="lg-video-object lg-html5 video-js"
@@ -29,10 +29,11 @@
   </div>
 
     <a
+      [id]="sourceSelector"
       [href]="gridMedia.isVideo() ? '' : gridMedia.getMediaPath()"
       [attr.data-download-url]="gridMedia.getMediaPath()"
       [attr.data-poster]="gridMedia.isVideo() ? thumbnail.Src : ''"
-      [attr.data-html]="gridMedia.isVideo() ? '#'+videoSelector : ''"
+      [attr.data-html]="gridMedia.isVideo() ? '#video-'+sourceSelector : ''"
     >
       <img
         #img *ngIf="thumbnail.Available"

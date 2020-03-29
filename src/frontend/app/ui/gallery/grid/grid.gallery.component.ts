@@ -76,21 +76,53 @@ const setupLightGallery = (): void => {
       scale: 0.5,
     });
 
-    // Allow back button to close lightbox
+    // Allow back button to close lightbox and push link to actual file
+    const updateHistory = () => {
+      const id = el.getAttribute('lg-uid');
+      const lightbox = window.lgData[id];
+      const filename = lightbox.items[lightbox.index].getAttribute('id');
+      const title = document.title.split(' - ')[0] + ' - ' + filename;
+
+      document.title = title;
+
+      return { lightbox, filename, title };
+    };
     let listener: any = null;
-    el.addEventListener('onBeforeOpen', () => {
-      window.history.pushState('forward', null, window.location.href.split('#')[0] + '#modal');
+    el.addEventListener('onAfterOpen', () => {
+      const { lightbox, filename, title } = updateHistory();
+
+      window.history.pushState('forward', title, window.location.href.split('#')[0] + '#' + filename);
       listener = window.addEventListener('popstate', () => {
-        (window as any).lgData[el.getAttribute('lg-uid')].destroy();
+        lightbox.destroy();
       });
+    }, false);
+
+    el.addEventListener('onAfterSlide', () => {
+      const { filename, title } = updateHistory();
+      document.title = title;
+      window.history.replaceState('forward', title, window.location.href.split('#')[0] + '#' + filename);
     }, false);
 
     el.addEventListener('onBeforeClose', () => {
       if (listener) {
         el.removeEventListener('popstate', listener);
       }
+      document.title = document.title.split(' - ')[0];
       window.history.replaceState('forward', null, window.location.href.split('#')[0]);
     }, false);
+
+    window.addEventListener('beforeunload', () => {
+      document.title = document.title.split(' - ')[0];
+    });
+
+    if (window.location.hash) {
+      const element = document.querySelector(window.location.hash);
+      if (element) {
+        setTimeout(() => {
+          window.scrollTo({ top: element.getBoundingClientRect().top });
+        }, 250);
+      }
+    }
 
     // skip ahead on double touch
     // TODO: Pausing is broken on mobile, no clue why or how to fix it. You can pause it by changing slide for now.
