@@ -58,6 +58,7 @@
     "typeconfig": "2.0.9",
     "typeorm": "0.2.21",
     "video.js": "^7.6.6",
+    "videojs-extra-buttons": "^0.1.5",
     "winston": "2.4.4"
   },
   "devDependencies": {

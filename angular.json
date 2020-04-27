@@ -26,6 +26,7 @@
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/lightgallery.js/dist/css/lightgallery.min.css",
               "node_modules/video.js/dist/video-js.min.css",
+              "node_modules/videojs-extra-buttons/dist/videojs-extra-buttons.css",
               "src/frontend/styles.css"
             ],
             "scripts": [
@@ -35,7 +36,9 @@
               "node_modules/lg-fullscreen.js/dist/lg-fullscreen.min.js",
               "node_modules/lg-pager.js/dist/lg-pager.min.js",
               "node_modules/lg-thumbnail.js/dist/lg-thumbnail.min.js",
-              "node_modules/video.js/dist/video.min.js"
+              "node_modules/video.js/dist/video.min.js",
+              "node_modules/videojs-contrib-quality-levels/dist/videojs-contrib-quality-levels.min.js",
+              "node_modules/videojs-extra-buttons/dist/videojs-extra-buttons.min.js"
             ]
           },
           "configurations": {
