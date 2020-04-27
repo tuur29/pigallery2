@@ -120,6 +120,9 @@ const setupLightGallery = (): void => {
       if (element) {
         setTimeout(() => {
           window.scrollTo({ top: element.getBoundingClientRect().top });
+          try {
+            (element as any).click();
+          } catch {}
         }, 250);
       }
     }
