@@ -72,7 +72,7 @@ const setupLightGallery = (): void => {
       showThumbByDefault: false,
       videoMaxWidth: 'initial',
       pause: 3000,
-      zoom: true,
+      zoom: false, // zoom plugin has performance issues on mobile: https://github.com/sachinchoolur/lg-zoom.js/issues/1
       scale: 0.5,
     });
 
