@@ -146,6 +146,7 @@ const setupLightGallery = (): void => {
             player.extraButtons({
               quickForward: { seconds: 30 },
             });
+            videojsSetupDone = true;
         }
 
         // skip ahead on double touch
@@ -168,7 +169,6 @@ const setupLightGallery = (): void => {
           //   }, 500);
           // }
         }
-        videojsSetupDone = true;
       }
     });
 

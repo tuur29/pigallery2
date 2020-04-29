@@ -265,14 +265,23 @@ bs-dropdown-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 6em;
+  }
+
+  .video-js .vjs-volume-panel.vjs-volume-panel-vertical,
+  .video-js .vjs-volume-panel.vjs-control.vjs-volume-panel-vertical {
+    width: 6em;
   }
 
   .video-js .vjs-mute-control {
     justify-content: flex-end;
-    margin-left: 10px;
   }
 
   .video-js .vjs-button > .vjs-icon-placeholder:before {
     position: static;
+  }
+
+  .vjs-duration.vjs-time-control.vjs-control {
+    display: none !important;
   }
 }
