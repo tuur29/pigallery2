@@ -56,6 +56,28 @@ bs-dropdown-container {
   outline: none !important;
 }
 
+/* Fixes to search ui */
+.navbar-form .input-group input, .navbar-form .input-group button {
+  background: #111;
+  color: white;
+  border-color: #222;
+}
+
+.autocomplete-list {
+  background: black !important;
+  border-color: #333 !important;
+  z-index: 1;
+}
+
+.autocomplete-item a {
+  color: #bbb !important;
+  overflow-wrap: break-word;
+}
+
+.autocomplete-item span {
+  float: left;
+  margin-right: 5px;
+}
 
 /* Override lightGallery arrows */
 .lg-actions .lg-icon {

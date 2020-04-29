@@ -19,7 +19,7 @@
     <div class="autocomplete-list" *ngIf="autoCompleteItems.length > 0"
          (mouseover)="setMouseOverAutoComplete(true)" (mouseout)="setMouseOverAutoComplete(false)">
       <div class="autocomplete-item" *ngFor="let item of autoCompleteItems">
-        <a [routerLink]="['/search', item.text, {type: SearchTypes[item.type]}]">
+        <a [routerLink]="['/search', item.text, {type: SearchTypes[item.type]}]" [title]="item.preText + item.highLightText + item.postText">
                     <span [ngSwitch]="item.type">
                       <span *ngSwitchCase="SearchTypes.photo" class="oi oi-image"></span>
                       <span *ngSwitchCase="SearchTypes.person" class="oi oi-person"></span>
