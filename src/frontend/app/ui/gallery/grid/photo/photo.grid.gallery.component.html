@@ -44,9 +44,7 @@
   </ng-template>
 
   <!--Video indicator -->
-  <div *ngIf="gridMedia.isVideo()" class="video-indicator"
-       [style.marginTop.px]="-container.nativeElement.offsetHeight"
-       [style.marginLeft.px]="container.nativeElement.offsetWidth">
+  <div *ngIf="gridMedia.isVideo()" class="video-indicator">
     {{gridMedia.Video.metadata.duration  | duration}} <span class="oi oi-video"></span></div>
 
   <!--Info box -->
