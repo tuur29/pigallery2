@@ -28,6 +28,7 @@ import {SortingMethods} from '../../../../../common/entities/SortingMethods';
 import {MediaDTO} from '../../../../../common/entities/MediaDTO';
 import {QueryParams} from '../../../../../common/QueryParams';
 import {SeededRandomService} from '../../../model/seededRandom.service';
+import { setHashParam, removeHashParam, getHashParam } from '../../../utils';
 
 declare var lightGallery: any;
 declare var videojs: any;
@@ -92,7 +93,8 @@ const setupLightGallery = (): void => {
     let listener: any = null;
     el.addEventListener('onAfterOpen', () => {
       const { lightbox, filename, title } = updateHistory();
-      window.history.pushState('forward', title, window.location.href.split('#')[0] + '#' + filename);
+      const newUrl = window.location.href.split('#')[0] + setHashParam('file', filename);
+      window.history.pushState('forward', title, newUrl);
       listener = window.addEventListener('popstate', () => {
         lightbox.destroy();
       });
@@ -103,7 +105,8 @@ const setupLightGallery = (): void => {
 
       const { filename, title } = updateHistory();
       document.title = title;
-      window.history.replaceState('forward', title, window.location.href.split('#')[0] + '#' + filename);
+      const newUrl = window.location.href.split('#')[0] + setHashParam('file', filename);
+      window.history.replaceState('forward', title, newUrl);
     }, false);
 
     el.addEventListener('onBeforeClose', () => {
@@ -113,15 +116,17 @@ const setupLightGallery = (): void => {
         el.removeEventListener('popstate', listener);
       }
       document.title = document.title.split(' - ')[0];
-      window.history.replaceState('forward', null, window.location.href.split('#')[0]);
+      const newUrl = window.location.href.split('#')[0] + removeHashParam('file');
+      window.history.replaceState('forward', null, newUrl);
     }, false);
 
     window.addEventListener('beforeunload', () => {
       document.title = document.title.split(' - ')[0];
     });
 
-    if (window.location.hash) {
-      const element = document.querySelector(window.location.hash);
+    const hashFilename = getHashParam('file');
+    if (hashFilename) {
+      const element = document.querySelector(`#${hashFilename}`);
       if (element) {
         setTimeout(() => {
           window.scrollTo({ top: element.getBoundingClientRect().top });

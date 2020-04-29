@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import { getHashParam, setHashParam, removeHashParam } from '../utils';
 
 @Injectable()
 export class SeededRandomService {
@@ -7,8 +8,9 @@ export class SeededRandomService {
   private seed: number;
 
   constructor() {
-    if (window.location.hash && !isNaN(window.location.hash.replace('#', '') as any)) {
-      SeededRandomService.baseSeed = parseFloat(window.location.hash.replace('#', ''));
+    const hashSeed = getHashParam('seed');
+    if (hashSeed && !isNaN(parseInt(hashSeed))) {
+      SeededRandomService.baseSeed = parseFloat(hashSeed);
     }
     this.setSeed(0);
 
@@ -18,12 +20,12 @@ export class SeededRandomService {
   }
 
   static saveSeed() {
-    window.location.hash = `#${SeededRandomService.baseSeed}`;
+    window.location.hash = setHashParam('seed', SeededRandomService.baseSeed);
   }
 
   static clearSeed() {
     SeededRandomService.baseSeed = Math.random() * 2147483647;
-    window.location.hash = '';
+    window.location.hash = removeHashParam('seed');
   }
 
   setSeed(seed: number) {
