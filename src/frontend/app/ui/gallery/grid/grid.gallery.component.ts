@@ -60,9 +60,16 @@ const setupLightGallery = (): void => {
       videojsOptions: {
           fluid: true,
           controlBar: {
-              volumePanel: {
-                  inline: false
-              }
+            volumePanel: {
+              inline: false
+            }
+          },
+          plugins: {
+            extraButtons: {
+              quickBackward: { seconds: 30 },
+              quickForward: { seconds: 30 }
+            },
+            tapSkip: true,
           }
       },
       share: false,
@@ -77,7 +84,41 @@ const setupLightGallery = (): void => {
       scale: 0.5,
     });
 
-    let videojsSetupDone = false;
+     // Add VideoJS plugin for double tap to skip on mobile
+    videojs.registerPlugin('tapSkip', function() {
+      const player = this;
+
+      let lastPress = 0;
+      let timeout: any = null;
+
+      // Pausing is broken on mobile, looks like the click handler toggles the playing state twice, this toggles a third time after 2ms
+      player.on('pause', function(event: any) {
+        setTimeout(() => {
+          if (!player.paused()) {
+              player.pause();
+          }
+        }, 2);
+      });
+
+      player.on('touchend', function(event: any) {
+        if (event.target.nodeName.toLowerCase() !== 'video') {
+          return;
+        }
+
+        const currentPress = Date.now();
+          if (currentPress - lastPress < 500) {
+            player.currentTime(player.currentTime() + 30);
+            player.play();
+            lastPress = 0;
+            if (timeout) {
+              clearTimeout(timeout);
+              timeout = null;
+            }
+          } else {
+            lastPress = currentPress;
+          }
+      });
+    });
 
     // Allow back button to close lightbox and push link to actual file
     const updateHistory = () => {
@@ -86,10 +127,9 @@ const setupLightGallery = (): void => {
       const filename = lightbox.items[lightbox.index].getAttribute('id');
       const title = document.title.split(' - ')[0] + ' - ' + filename;
 
-      document.title = title;
-
       return { lightbox, filename, title };
     };
+
     let listener: any = null;
     el.addEventListener('onAfterOpen', () => {
       const { lightbox, filename, title } = updateHistory();
@@ -101,8 +141,6 @@ const setupLightGallery = (): void => {
     }, false);
 
     el.addEventListener('onAfterSlide', () => {
-      videojsSetupDone = false;
-
       const { filename, title } = updateHistory();
       document.title = title;
       const newUrl = window.location.href.split('#')[0] + setHashParam('file', filename);
@@ -110,8 +148,6 @@ const setupLightGallery = (): void => {
     }, false);
 
     el.addEventListener('onBeforeClose', () => {
-      videojsSetupDone = false;
-
       if (listener) {
         el.removeEventListener('popstate', listener);
       }
@@ -124,6 +160,7 @@ const setupLightGallery = (): void => {
       document.title = document.title.split(' - ')[0];
     });
 
+    // scroll to and open item that was references in url
     const hashFilename = getHashParam('file');
     if (hashFilename) {
       const element = document.querySelector(`#${hashFilename}`);
@@ -136,46 +173,6 @@ const setupLightGallery = (): void => {
         }, 250);
       }
     }
-
-    // TODO: Pausing is broken on mobile, no clue why or how to fix it. You can pause it by changing slide for now.
-    let lastPress = 0;
-    let timeout: any = null;
-    el.addEventListener('onSlideClick', () => {
-      const video = document.querySelector('.lg-current video') as any;
-      if (video) {
-        const player = videojs(video);
-
-        // TODO: setup only happens after interaction with videojs, cannot find a better lightgallery event :(
-        // setup plugins
-        if (!videojsSetupDone) {
-            player.extraButtons({
-              quickForward: { seconds: 30 },
-            });
-            videojsSetupDone = true;
-        }
-
-        // skip ahead on double touch
-        const currentPress = Date.now();
-        if (currentPress - lastPress < 500) {
-          player.currentTime(player.currentTime() + 30);
-          player.play();
-          lastPress = 0;
-          if (timeout) {
-            clearTimeout(timeout);
-            timeout = null;
-          }
-        } else {
-          lastPress = currentPress;
-          // TODO: there is no way to easily know if the player is playing, only if it is not paused (causes issues when buffering)
-          // if (!player.paused()) {
-          //   timeout = setTimeout(() => {
-          //     player.pause();
-          //     timeout = null;
-          //   }, 500);
-          // }
-        }
-      }
-    });
 
   }, 50);
 };

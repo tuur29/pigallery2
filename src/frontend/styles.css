@@ -81,10 +81,10 @@ bs-dropdown-container {
 
 /* Override lightGallery arrows */
 .lg-actions .lg-icon {
-  top: 50px;
+  top: 100px;
 	display: flex;
 	align-items: center;
-  height: calc(100% - 100px);
+  height: calc(100% - 250px);
 	padding: 0 20px;
   background-color: transparent;
   -webkit-tap-highlight-color: transparent;
@@ -248,13 +248,17 @@ bs-dropdown-container {
 
 @media (max-width: 997px) {
 
-  .video-js .vjs-progress-control {
+  .video-js .vjs-control.vjs-progress-control {
     position: absolute;
     top: -4em;
     left: 0;
     right: 0;
     width: 100%;
     height: 4em;
+  }
+
+  .video-js .vjs-quick-backward {
+    display: none !important;
   }
 
   .video-js .vjs-control-bar {
