@@ -414,3 +414,11 @@ Put some media in `./demo/images` and run:
 - `npm run start-dev -- --config-path ./demo/config/config.json`
 
 Rebuild backend with: `npm run build-backend`
+
+#### Releasing Docker container
+
+```sh
+cd docker/debian-stretch/selfcontained
+docker build -t tuur29/pigallery2 .
+docker push tuur29/pigallery2:latest
+```
