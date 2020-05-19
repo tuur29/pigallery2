@@ -8,8 +8,10 @@
 
   <!--Default lightbox image -->
   <ng-container *ngIf="!useLightGallery; else lightGalleryPhoto">
-    <img alt="{{gridMedia.media.name}}" #img [src]="thumbnail.Src | fixOrientation:gridMedia.Orientation | async"
+    <a [href]="gridMedia.getMediaPath()">
+      <img alt="{{gridMedia.media.name}}" #img [src]="thumbnail.Src | fixOrientation:gridMedia.Orientation | async"
         *ngIf="thumbnail.Available">
+    </a>
   </ng-container>
 
   <!--Lightgallery image -->
@@ -29,6 +31,7 @@
   </div>
 
     <a
+      class="lightbox"
       [id]="sourceSelector"
       [href]="gridMedia.isVideo() ? '' : gridMedia.getMediaPath()"
       [attr.data-download-url]="gridMedia.getMediaPath()"
@@ -45,13 +48,14 @@
 
   <!--Video indicator -->
   <div *ngIf="gridMedia.isVideo()" class="video-indicator">
-    {{gridMedia.Video.metadata.duration | duration}} <span class="oi oi-video"></span></div>
+    <span *ngIf="!useLightGallery"class="oi oi-data-transfer-download"></span> {{gridMedia.Video.metadata.duration | duration}} <span class="oi oi-video"></span>
+  </div>
 
   <!--Info box -->
   <div class="info"
        *ngIf="infoBarVisible"
        [style.width.px]="container.nativeElement.offsetWidth">
-    <div class="photo-name">{{Title}}</div>
+    <div class="photo-name"><span *ngIf="!useLightGallery"class="oi oi-data-transfer-download"></span> {{Title}}</div>
 
     <div class="photo-position" *ngIf="gridMedia.hasPositionData()">
       <span class="oi oi-map-marker"></span>

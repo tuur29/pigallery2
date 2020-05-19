@@ -42,7 +42,7 @@ const setupLightGallery = (): void => {
 
   setTimeout(() => {
     lightGallery(el, {
-      selector: 'a',
+      selector: 'a.lightbox',
       controls: true,
       loop : false,
       download: true,
@@ -209,6 +209,7 @@ export class GalleryGridComponent implements OnChanges, OnInit, AfterViewInit, O
   private helperTime: number = null;
   private renderedPhotoIndex = 0;
   private useLightGallery = true; // when using lightGallery, make sure you disable the Client.Other.enableOnScrollRendering setting
+  private ignoredExtensions = ['wmv', 'avi', 'mov', 'mpg', 'rn', 'divx']; // will be shown as basic links instead
 
   constructor(private overlayService: OverlayService,
               private changeDetector: ChangeDetectorRef,
