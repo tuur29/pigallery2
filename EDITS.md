@@ -14,7 +14,7 @@
   - Made it the default setting
   - Darkened placeholder images and icons
   - Changed Android statusbar to black
-- Use [lightgallery.js](https://sachinchoolur.github.io/lightgallery.js/) and [videojs](https://videojs.com/) instead of the default lightbox
+  - Use [lightgallery.js](https://sachinchoolur.github.io/lightgallery.js/) and [videojs](https://videojs.com/) instead of the default lightbox (See Client.Other.disableLightGallery setting)
   - Improvements to lightGallery and videoJs themes and functionality
 
 ## Improvements

@@ -372,7 +372,8 @@ Environmental variables:
             "NavBar": {
                 "showItemCount": true
             },
-            "captionFirstNaming": false
+            "captionFirstNaming": false,
+            "disableLightGallery": false // disable custom lightgallery plugin
         },
         "authenticationRequired": true,
         "unAuthenticatedUserRole": "Admin",

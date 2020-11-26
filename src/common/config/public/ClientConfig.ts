@@ -111,6 +111,8 @@ export module ClientConfig {
     NavBar: NavBarConfig = new NavBarConfig();
     @ConfigProperty()
     captionFirstNaming: boolean = false; // shows the caption instead of the filename in the photo grid
+    @ConfigProperty()
+    disableLightGallery: boolean = false;
   }
 
   @SubConfigClass()

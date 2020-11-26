@@ -7,7 +7,8 @@
     [style.height.px]="gridPhoto.renderHeight"
     [style.marginLeft.px]="IMAGE_MARGIN"
     [style.marginRight.px]="IMAGE_MARGIN"
-    [useLightGallery]="!ignoredExtensions.includes(gridPhoto.getExtension()) && useLightGallery">
+    [useLightGallery]="useLightGallery"
+    [unsupported]="unsupportedExtensions.includes(gridPhoto.getExtension())">
 
   </app-gallery-grid-photo>
 </div>
